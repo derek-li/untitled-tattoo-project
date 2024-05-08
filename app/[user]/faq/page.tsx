@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
 export default function Page() {
-  return <p>Faq Page</p>;
+  return <p>Faq Page</p>
 }

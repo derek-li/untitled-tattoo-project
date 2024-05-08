@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import Navigation from '@/components/navigation';
+import Navigation from '@/components/navigation'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,5 +8,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Navigation />
       <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
     </div>
-  );
+  )
 }
