@@ -1,3 +1,6 @@
+// Lint config is following online recommendations and not completely vetted.
+// If there are rules you disagree with, bring it up.
+
 {
   "extends": [
     "next",
@@ -5,7 +8,11 @@
     "eslint:recommended",
     "plugin:react/recommended"
   ],
-  "plugins": ["import", "simple-import-sort"],
+  "plugins": [
+    "import", 
+    "import-quotes",
+    "simple-import-sort"
+  ],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
@@ -14,7 +21,8 @@
     "import/no-duplicates": "error",
 		"import/no-named-as-default-member": 0,
 		"import/no-named-as-default": 0,
-		"import/default": 0
+		"import/default": 0,
+    "import-quotes/import-quotes": [1, "single"]
   },
   "parserOptions": {
     "sourceType": "module",
