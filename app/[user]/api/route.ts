@@ -5,6 +5,11 @@
 // app/[user]/page.js	 app/api/route.js	 Valid
 
 export const dynamic = 'force-dynamic' // defaults to auto
-export async function GET() {}
+export async function GET(request: Request) {
+  console.log(new URL(request.url))
+  // const { user } = params
+  console.log('I got the world: ')
+  return Response.json({ 'hello ': 'world'})
+}
 // export async function GET(request: Request) {}
 
