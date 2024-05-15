@@ -1,15 +1,16 @@
-// route.ts files cannot exist on the same level where there is a page.tsx file
-// Page	               Route	           Result
-// app/page.js	       app/route.js	     Conflict
-// app/page.js	       app/api/route.js	 Valid
-// app/[user]/page.js	 app/api/route.js	 Valid
+import { PrismaClient } from '@prisma/client'
 
-export const dynamic = 'force-dynamic' // defaults to auto
-export async function GET(request: Request) {
-  console.log(new URL(request.url))
-  // const { user } = params
-  console.log('I got the world: ')
-  return Response.json({ 'hello ': 'world'})
+const prisma = new PrismaClient()
+
+export const dynamic = 'force-dynamic'
+export async function GET(request: Request, { params }: { params: { user: string }}) {
+  const username = params.user
+
+  const user = await prisma.users.findUnique({
+    where: {
+      username: username,
+    },
+  })
+
+  return Response.json(user)
 }
-// export async function GET(request: Request) {}
-
