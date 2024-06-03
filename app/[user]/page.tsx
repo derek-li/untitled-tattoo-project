@@ -1,10 +1,13 @@
 'use client'
 
+import { parseApiResponse } from 'app/_utils/parsing'
 import { usePathname } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 export default function Page() {
   const pathname = usePathname()
+
+  const [user, setUser] = useState<any>()
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -15,7 +18,7 @@ export default function Page() {
           throw new Error('Failed to fetch user data')
         }
         const data = await response.json()
-        console.log(data)
+        setUser(parseApiResponse(data))
       } catch (e) {
         console.log('Failed to fetch user data')
       }
@@ -27,5 +30,32 @@ export default function Page() {
     
   }, [pathname])
 
-  return <p>Users Page</p>
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
+  const renderLinks = (socialMedia: any): ReactNode => {
+    const links = socialMedia.map((media: string) => {
+      return (
+        <div key={media}>{media}</div>
+      )
+    })
+    return links
+  }
+
+  return (
+    <div className="flex min-h-screen flex-col font-mono text-sm gap-4 p-24">
+      <div className="border border-rose-300 p-6 flex">
+        {user && (
+          <>
+            <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
+              <div>@{user.username}</div>
+              <div>{renderLinks(user.socialMedia)}</div>
+              <div>Bio</div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  )
 }
