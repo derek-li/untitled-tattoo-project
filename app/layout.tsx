@@ -6,6 +6,8 @@ import React from 'react'
 
 import Stytch from '@/components/stytch'
 
+import Navigation from './_components/navigation'
+
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -21,7 +23,12 @@ export default function RootLayout({
   return (
     <Stytch>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <Navigation />
+          <main >
+            {children}
+          </main>
+        </body>
       </html>
     </Stytch>
   )
