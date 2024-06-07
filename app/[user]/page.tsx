@@ -1,13 +1,17 @@
 'use client'
 
+import { useStytchUser } from '@stytch/nextjs'
+import { TUser } from 'app/_utils/definitions'
 import { parseApiResponse } from 'app/_utils/parsing'
 import { usePathname } from 'next/navigation'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Page() {
+  const { user, isInitialized } = useStytchUser()
   const pathname = usePathname()
 
-  const [user, setUser] = useState<any>()
+  const [userData, setUserData] = useState<TUser>()
+  const [isOwner, setIsOwner] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -18,7 +22,7 @@ export default function Page() {
           throw new Error('Failed to fetch user data')
         }
         const data = await response.json()
-        setUser(parseApiResponse(data))
+        setUserData(parseApiResponse(data))
       } catch (e) {
         console.log('Failed to fetch user data')
       }
@@ -27,31 +31,24 @@ export default function Page() {
     if (pathname) {
       fetchUserData()
     }
-    
   }, [pathname])
 
   useEffect(() => {
-    console.log(user)
-  }, [user])
-
-  const renderLinks = (socialMedia: any): ReactNode => {
-    const links = socialMedia.map((media: string) => {
-      return (
-        <div key={media}>{media}</div>
-      )
-    })
-    return links
-  }
+    if (isInitialized && user?.untrusted_metadata?.username === userData?.username) {
+      setIsOwner(true)
+    }
+  }, [isInitialized, user, userData])
 
   return (
-    <div className="flex min-h-screen flex-col font-mono text-sm gap-4 p-24">
+    <div className="flex h-[calc(100vh-56px)] mt-14 flex-col font-mono text-sm">
       <div className="border border-rose-300 p-6 flex">
         {user && (
           <>
             <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
-              <div>@{user.username}</div>
-              <div>{renderLinks(user.socialMedia)}</div>
               <div>Bio</div>
+              {isOwner && (
+                <div>I am the owner</div>
+              )}
             </div>
           </>
         )}

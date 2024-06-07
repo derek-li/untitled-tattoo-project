@@ -1,9 +1,9 @@
 // Data types here
-export type User = {
+export type TUser = {
   id: string,
   username: string,
-  profileImageUrl: string,
+  email: string,
+  profileImageUrl?: string,
   instagram?: string,
-  email?: string,
   phone?: string
 }

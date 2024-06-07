@@ -1,9 +1,9 @@
 'use client'
 
-import { StytchLogin, useStytchUser } from '@stytch/nextjs'
+import { StytchLogin } from '@stytch/nextjs'
 import { Products } from '@stytch/vanilla-js'
 import { getDomainFromWindow } from 'app/_utils/routing'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 /*
  * Login configures and renders the StytchLogin component which is a prebuilt UI component for auth powered by Stytch.
@@ -12,14 +12,6 @@ import React, { useEffect } from 'react'
  * https://stytch.com/docs/sdks/javascript-sdk#ui-configs.
 */
 export default function Login() {
-  const { user, isInitialized } = useStytchUser()
-
-  useEffect(() => {
-    console.log(isInitialized, user)
-    console.log(getDomainFromWindow() + '/authenticate')
-  }, [user, isInitialized])
-
-
   const styles = {
     container: {
       width: '600px',
