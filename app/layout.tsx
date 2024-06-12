@@ -1,10 +1,9 @@
 import './globals.css'
 
+import Navigation from '@components/navigation'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from 'react'
-
-import Navigation from './_components/navigation'
 
 const inter = Inter({ subsets: ["latin"] })
 

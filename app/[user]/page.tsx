@@ -1,3 +1,4 @@
+'use client'
 // import { TUser } from '@utils/definitions'
 import { parseApiResponse } from '@utils/parsing'
 import React, { useEffect } from 'react'
