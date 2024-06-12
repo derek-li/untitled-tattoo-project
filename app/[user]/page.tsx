@@ -1,16 +1,8 @@
-'use client'
-
-import { useStytchUser } from '@stytch/nextjs'
-import { TUser } from 'app/_utils/definitions'
-import { parseApiResponse } from 'app/_utils/parsing'
-import React, { useEffect, useState } from 'react'
+// import { TUser } from '@utils/definitions'
+import { parseApiResponse } from '@utils/parsing'
+import React, { useEffect } from 'react'
 
 export default function Page({ params }: { params: { user: string }}) {
-  const { user, isInitialized } = useStytchUser()
-
-  const [userData, setUserData] = useState<TUser>()
-  const [isOwner, setIsOwner] = useState<boolean>(false)
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -20,7 +12,7 @@ export default function Page({ params }: { params: { user: string }}) {
           throw new Error('Failed to fetch user data')
         }
         const data = await response.json()
-        setUserData(parseApiResponse(data))
+        console.log(parseApiResponse(data))
       } catch (e) {
         console.log('Failed to fetch user data')
       }
@@ -29,16 +21,10 @@ export default function Page({ params }: { params: { user: string }}) {
     fetchUserData()
   }, [params])
 
-  useEffect(() => {
-    if (isInitialized && user?.untrusted_metadata?.username === userData?.username) {
-      setIsOwner(true)
-    }
-  }, [isInitialized, user, userData])
-
   return (
     <div>
       <div className="border border-rose-300 p-6 flex">
-        {user && (
+        {/* {user && (
           <>
             <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
               <div>Bio</div>
@@ -47,7 +33,7 @@ export default function Page({ params }: { params: { user: string }}) {
               )}
             </div>
           </>
-        )}
+        )} */}
       </div>
     </div>
   )

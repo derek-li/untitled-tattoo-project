@@ -1,6 +1,5 @@
 import './globals.css'
 
-import Stytch from '@components/stytch'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React from 'react'
@@ -20,15 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Stytch>
-      <html lang="en">
-        <body className={inter.className}>
-          <Navigation />
-          <main className="h-[calc(100vh-56px)] w-full flex flex-col justify-center items-center mt-14 font-mono text-sm">
-            {children}
-          </main>
-        </body>
-      </html>
-    </Stytch>
+    <html lang="en">
+      <body className={inter.className}>
+        <Navigation />
+        <main className="h-[calc(100vh-56px)] w-full flex flex-col justify-center items-center mt-14 font-mono text-sm">
+          {children}
+        </main>
+      </body>
+    </html>
   )
 }

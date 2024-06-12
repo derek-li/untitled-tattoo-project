@@ -19,6 +19,8 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@auth": ["auth"],
+      "@assets/*": ["app/_assets/*"],
       "@components/*": ["app/_components/*"],
       "@utils/*": ["app/_utils/*"]
     }

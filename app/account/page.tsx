@@ -1,8 +1,6 @@
 'use client'
 
-import { useStytchUser } from '@stytch/nextjs'
-import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 type Inputs = {
@@ -11,8 +9,6 @@ type Inputs = {
 }
 
 export default function Account() {
-  const { user, isInitialized } = useStytchUser()
-  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -22,12 +18,6 @@ export default function Account() {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
   console.log(watch("username"))
-
-  useEffect(() => {
-    if (isInitialized && !user) {
-      router.replace('login')
-    }
-  }, [isInitialized, router, user])
 
   return (
     <form className="h-full w-1/2 flex flex-col border-b-100 border gap-4 my-16 p-4" onSubmit={handleSubmit(onSubmit)}>
