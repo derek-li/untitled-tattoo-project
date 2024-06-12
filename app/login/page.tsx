@@ -41,8 +41,6 @@ export default function Login() {
   } as Parameters<typeof StytchLogin>[0]['config']
 
   return (
-    <div className='w-full h-[calc(100vh-56px)] mt-14 flex justify-center items-center'>
-      <StytchLogin config={config} styles={styles} />
-    </div>
+    <StytchLogin config={config} styles={styles} />
   )
 }

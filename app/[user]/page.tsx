@@ -3,12 +3,10 @@
 import { useStytchUser } from '@stytch/nextjs'
 import { TUser } from 'app/_utils/definitions'
 import { parseApiResponse } from 'app/_utils/parsing'
-import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-export default function Page() {
+export default function Page({ params }: { params: { user: string }}) {
   const { user, isInitialized } = useStytchUser()
-  const pathname = usePathname()
 
   const [userData, setUserData] = useState<TUser>()
   const [isOwner, setIsOwner] = useState<boolean>(false)
@@ -16,7 +14,7 @@ export default function Page() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const user = pathname.slice(1)
+        const user = params.user
         const response = await fetch(`/${user}/api`)
         if (!response.ok) {
           throw new Error('Failed to fetch user data')
@@ -28,10 +26,8 @@ export default function Page() {
       }
     }
 
-    if (pathname) {
-      fetchUserData()
-    }
-  }, [pathname])
+    fetchUserData()
+  }, [params])
 
   useEffect(() => {
     if (isInitialized && user?.untrusted_metadata?.username === userData?.username) {
@@ -40,7 +36,7 @@ export default function Page() {
   }, [isInitialized, user, userData])
 
   return (
-    <div className="flex h-[calc(100vh-56px)] mt-14 flex-col font-mono text-sm">
+    <div>
       <div className="border border-rose-300 p-6 flex">
         {user && (
           <>
