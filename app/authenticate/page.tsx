@@ -1,9 +1,7 @@
 import { auth } from '@auth'
-import { PrismaClient } from '@prisma/client'
 import { generateUsername } from '@utils/helpers'
 import { redirect } from 'next/navigation'
-
-const prisma = new PrismaClient()
+import prisma from 'prisma/prisma'
 
 export default async function Authenticate() {
   const session = await auth()

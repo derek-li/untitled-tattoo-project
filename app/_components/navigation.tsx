@@ -1,4 +1,4 @@
-import { auth } from '@auth'
+import { auth, signOut } from '@auth'
 import Link from 'next/link'
 import React from 'react'
 
@@ -12,9 +12,20 @@ export default async function Navigation() {
           Account
         </Link>
       )}
-      <Link href="/login" className="flex items-center py-1 hover:text-blue-600">
-        Sign in
-      </Link>
+      {session ?
+        <form action={async () => {
+          'use server'
+          await signOut({ redirectTo: '/login'})
+        }}>
+          <button type="submit" className="flex items-center py-1 hover:text-blue-600">
+            Sign out
+          </button>
+        </form>
+         :
+        <Link href="/login" className="flex items-center py-1 hover:text-blue-600">
+          Sign in
+        </Link>
+      }
     </header>
   )
 }

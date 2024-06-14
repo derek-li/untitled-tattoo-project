@@ -1,40 +1,26 @@
-'use client'
-// import { TUser } from '@utils/definitions'
-import { parseApiResponse } from '@utils/parsing'
-import React, { useEffect } from 'react'
+import { TUser } from '@utils/definitions'
+import { redirect } from 'next/navigation'
+import prisma from 'prisma/prisma'
+import React from 'react'
 
-export default function Page({ params }: { params: { user: string }}) {
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const user = params.user
-        const response = await fetch(`/${user}/api`)
-        if (!response.ok) {
-          throw new Error('Failed to fetch user data')
-        }
-        const data = await response.json()
-        console.log(parseApiResponse(data))
-      } catch (e) {
-        console.log('Failed to fetch user data')
-      }
-    }
+export default async function Page({ params }: { params: { user: string }}) {
+  const user: TUser | null = await prisma.users.findUnique({
+    where: {
+      username: params.user,
+    },
+  })
 
-    fetchUserData()
-  }, [params])
+  if (!user) {
+    // [Note]: Maybe redirect to a "user does not exist page"
+    redirect('/login')
+  }
 
   return (
     <div>
       <div className="border border-rose-300 p-6 flex">
-        {/* {user && (
-          <>
-            <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
-              <div>Bio</div>
-              {isOwner && (
-                <div>I am the owner</div>
-              )}
-            </div>
-          </>
-        )} */}
+          <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
+            <div>{user?.username}</div>
+          </div>
       </div>
     </div>
   )
