@@ -22,7 +22,7 @@ export default function Account() {
   return (
     <form className="h-full w-1/2 flex flex-col border-b-100 border gap-4 my-16 p-4" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex justify-start items-center gap-4 border border-black-300 p-4 background-black-300">
-        <div className="border border-red-500 rounded-full w-24 h-24 bg-stone-200" />
+        <div className="border rounded-full w-24 h-24 bg-stone-200" />
         <input defaultValue="usernamegoeshere" {...register("username")} />
       </div>
       
