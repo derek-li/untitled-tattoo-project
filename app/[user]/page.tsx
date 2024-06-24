@@ -16,11 +16,10 @@ export default async function Page({ params }: { params: { user: string }}) {
   }
 
   return (
-    <div>
-      <div className="h-full w-1/2 flex flex-col border-b-100 border gap-4 my-16 p-4">
-          <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
-            <div>{user?.username}</div>
-          </div>
+    <div className="h-full w-1/2 flex flex-col border-b-100 border gap-4 my-16 p-4">
+        <div className="flex items-center gap-4">
+        <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" />
+        <input id="username" name="username" type="text" defaultValue={user.username} />
       </div>
     </div>
   )
