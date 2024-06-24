@@ -17,16 +17,11 @@ export default async function Authenticate() {
     create: {
       email: session.user.email,
       username: generateUsername(),
-      // [Note]: Remove password from users table
-      password: '12345678',
-      is_booking_open: true,
-      social_media: [],
-      pages: []
     },
   })
 
   if (username) {
-    redirect(`http://localhost:3000/${username}`)
+    redirect(`/${username}`)
   } else {
     redirect('/login')
   }

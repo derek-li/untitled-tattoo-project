@@ -15,11 +15,8 @@ export async function POST(request: Request) {
     create: {
       email: data.email,
       username: data.username,
-      // [Note]: Remove password from users table
-      password: '12345678',
-      is_booking_open: true,
-      social_media: [],
-      pages: []
+      description: data.description,
+      isBookingOpen: true
     },
   })
 

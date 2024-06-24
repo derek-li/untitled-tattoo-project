@@ -43,7 +43,7 @@ export const getUserFromSession = cache(async () => {
 export const updateUser = async (email: string, formData: FormData) => {
   const rawData = {
     username: formData.get('username'),
-    bio: formData.get('description'),
+    description: formData.get('description'),
     isBookingOpen: formData.get('bookingsOpen')
   }
 
@@ -53,8 +53,8 @@ export const updateUser = async (email: string, formData: FormData) => {
     },
     data: {
       username: rawData.username?.toString(),
-      bio: rawData.bio?.toString(),
-      is_booking_open: rawData.isBookingOpen === 'on'
+      description: rawData.description?.toString(),
+      isBookingOpen: rawData.isBookingOpen === 'on'
     }
   })
 

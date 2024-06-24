@@ -15,10 +15,17 @@ export default async function Account() {
         <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" />
         <input id="username" name="username" type="text" defaultValue={user.username} />
       </div>
-      <textarea id="description" name="description" rows={4} defaultValue={user.bio || ''} />
+      <textarea
+        className="p-2"
+        id="description"
+        name="description"
+        rows={6}
+        defaultValue={user.description || ''}
+        placeholder="Add a brief description"
+      />
       <div className="flex justify-between items-center">
         <label htmlFor="bookingsOpen">Books Open</label>
-        <input id="bookingsOpen" name="bookingsOpen" type="checkbox" defaultChecked={user.is_booking_open} />
+        <input id="bookingsOpen" name="bookingsOpen" type="checkbox" defaultChecked={user.isBookingOpen} />
       </div>
 
       <button type="submit" className="self-end">Save Changes</button>
