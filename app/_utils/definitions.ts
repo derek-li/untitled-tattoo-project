@@ -3,9 +3,9 @@ export type TUser = {
   id: string,
   username: string,
   email: string,
-  description?: string,
-  profileImageUrl?: string,
-  form: TForm
+  description: string,
+  profileImageUrl: string,
+  form?: TForm
 }
 
 export type TForm = {

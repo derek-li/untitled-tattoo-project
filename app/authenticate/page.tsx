@@ -17,6 +17,8 @@ export default async function Authenticate() {
     create: {
       email: session.user.email,
       username: generateUsername(),
+      description: '',
+      profileImageUrl: '',
     },
   })
 

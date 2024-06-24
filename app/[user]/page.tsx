@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { user: string }}) {
 
   return (
     <div>
-      <div className="border border-rose-300 p-6 flex">
+      <div className="h-full w-1/2 flex flex-col border-b-100 border gap-4 my-16 p-4">
           <div className="border border-black-300 rounded-full w-36 h-36 bg-stone-200" /><div>
             <div>{user?.username}</div>
           </div>
